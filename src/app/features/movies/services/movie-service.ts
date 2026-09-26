@@ -10,6 +10,6 @@ export class MovieService {
   private apiUrl = environment.apiUrl;
 
   getDiscoverMovies() {
-    this.http.get<TmdbResponse<Movie>>(`${this.apiUrl}/discover/movie`);
+    return this.http.get<TmdbResponse<Movie>>(`${this.apiUrl}/discover/movie`);
   }
 }
