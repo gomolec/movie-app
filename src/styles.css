@@ -40,6 +40,9 @@
 
   --tracking-tighter: -0.02em;
   --tracking-base: 0em;
+  --tracking-looser: 0.02em;
+
+  --content-width: 950px;
 }
 
 * {
@@ -57,7 +60,16 @@ body {
 }
 
 h1, h2, h3, h4 {
-  font-family: var(--font-heading);
+  /* font-family: var(--font-heading);
   line-height: var(--leading-none);
-  letter-spacing: var(--tracking-tighter);
+  letter-spacing: var(--tracking-tighter); */
+  font-size: inherit;
+  font-weight: inherit;
+  line-height: inherit;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  background-color: var(--neutral-900);
 }

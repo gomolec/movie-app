@@ -1,0 +1,12 @@
+<a [routerLink]="['/movie', movie().id]" class="movie-card">
+  <div class="movie-poster">
+    <img
+      [src]="imageBaseUrl + movie().poster_path"
+      [alt]="'Plakat filmu' + movie().title"
+    >
+  </div>
+  <!-- <div class="movie-info">
+    <h3 class="movie-title">{{ movie().title }}</h3>
+    <span class="release-date">{{ releaseYear() }}</span>
+  </div> -->
+</a>

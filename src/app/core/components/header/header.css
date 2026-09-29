@@ -1,0 +1,24 @@
+.header {
+  background-color: var(--neutral-900);
+  height: 72px;
+  box-shadow: inset 0 -10px 10px -10px rgba(0, 0, 0, 0.5);
+}
+
+.header-content {
+  max-width: var(--content-width);
+  margin: 0 auto;
+  width: 100%;
+  padding: 0 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+}
+
+.logo {
+  font-size: var(--text-lg);
+  letter-spacing: var(--tracking-tighter);
+  line-height: var(--leading-none);
+  font-weight: 700;
+  color: var(--neutral-50);
+}
