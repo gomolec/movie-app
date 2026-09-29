@@ -6,7 +6,8 @@ export const tmdbAuthInterceptor: HttpInterceptorFn = (req, next) => {
   if (req.url.startsWith(environment.apiUrl)) {
     const modifiedReq = req.clone({
       setParams: {
-        api_key: environment.tmdbApiKey
+        api_key: environment.tmdbApiKey,
+        language: 'pl-PL'
       }
     });
 

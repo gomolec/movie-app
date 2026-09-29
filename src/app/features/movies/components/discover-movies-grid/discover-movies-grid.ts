@@ -1,6 +1,7 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, resource } from '@angular/core';
 import { MovieService } from '../../services/movie-service';
 import { MovieCard } from '../movie-card/movie-card';
+import { rxResource } from '@angular/core/rxjs-interop';
 
 @Component({
   imports: [MovieCard],
@@ -11,5 +12,7 @@ import { MovieCard } from '../movie-card/movie-card';
 export class DiscoverMoviesGrid {
   private movieService = inject(MovieService);
 
-  public movieResource = this.movieService.discoverMovies;
+  public movieResource = rxResource({
+    stream: () => this.movieService.getDiscoverMovies(),
+  });
 }

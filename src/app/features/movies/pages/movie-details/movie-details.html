@@ -1,1 +1,80 @@
-<p>movie-details works!</p>
+@if (movieResource.isLoading()) {
+  <p>Ładowanie...</p>
+}
+
+@if (movieResource.error()) {
+  <div>
+    <p>Błąd: {{movieResource.error()}}</p>
+    <button (click)="movieResource.reload()">Odśwież</button>
+  </div>
+}
+
+@if (movieResource.hasValue()) {
+  @let movie = movieResource.value();
+  <article class="movie-page">
+    <div class="backdrop-header">
+      @if (movie.backdrop_path) {
+        <img [src]="backdropBaseUrl + movie.backdrop_path" alt="Tło filmu">
+      }
+    </div>
+
+    <div class="content-wrapper">
+
+      <aside class="poster-sidebar">
+        <img [src]="imageBaseUrl + movie.poster_path" [alt]="movie.title">
+      </aside>
+
+      <section class="details-main">
+
+        <div class="title-section">
+          <h2>{{ movie.title }}</h2>
+          @if (movie.original_title !== movie.title) {
+            <h2 class="original-title">{{ movie.original_title }}</h2>
+          }
+        </div>
+
+        <div class="meta-info">
+          <span>{{ movie.release_date | date:'yyyy' }}</span>
+          <span>•</span>
+          <span>{{ movie.runtime }} min</span>
+          <span>•</span>
+          <span>Ocena: {{ movie.vote_average | number:'1.1-1' }}/10</span>
+        </div>
+
+        <ul class="genres-list">
+          @for (genre of movie.genres; track genre.id) {
+            <li>{{ genre.name }}</li>
+          }
+        </ul>
+
+        <div class="overview-section">
+          <h3>Fabuła</h3>
+          <p>{{ movie.overview }}</p>
+        </div>
+
+        <div class="credits-section">
+          @if (director()) {
+            <div class="crew-member">
+              <strong>Reżyseria: </strong> <span>{{ director()?.name }}</span>
+            </div>
+          }
+
+          <div class="cast-list">
+            <strong>Główne role: </strong>
+            @for (actor of mainCast(); track actor.id) {
+              <span>{{ actor.name }}@if (!$last) { , }</span>
+            }
+          </div>
+        </div>
+
+        <div class="production-section">
+          <strong>Produkcja: </strong>
+          @for (company of movie.production_companies; track company.id) {
+            <span>{{ company.name }}@if (!$last) { , }</span>
+          }
+        </div>
+
+      </section>
+    </div>
+  </article>
+}
