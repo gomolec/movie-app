@@ -1,0 +1,11 @@
+.section-title {
+  font-size: var(--text-sm);
+  letter-spacing: var(--tracking-looser);
+}
+
+.divider {
+  border: none;
+  height: 1px;
+  background-color: var(--neutral-600);
+  margin: 2px 0 12px 0;
+}

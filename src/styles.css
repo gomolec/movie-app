@@ -27,6 +27,7 @@
   --font-base: "Plus Jakarta Sans", sans-serif;
   --font-heading: "Source Serif 4", serif;
 
+  --text-xs: clamp(0.7rem, 0.13vw + 0.67rem, 0.77rem);
   --text-sm: clamp(0.8rem, 0.17vw + 0.76rem, 0.89rem);
   --text-base: clamp(1rem, 0.34vw + 0.91rem, 1.19rem);
   --text-lg: clamp(1.25rem, 0.61vw + 1.1rem, 1.58rem);

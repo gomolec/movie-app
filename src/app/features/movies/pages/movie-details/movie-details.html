@@ -11,16 +11,17 @@
 
 @if (movieResource.hasValue()) {
   @let movie = movieResource.value();
+
   <article class="movie-page">
-    <div class="backdrop-header">
+    <!-- <div class="backdrop-image">
       @if (movie.backdrop_path) {
         <img [src]="backdropBaseUrl + movie.backdrop_path" alt="Tło filmu">
       }
-    </div>
+    </div> -->
 
     <div class="content-wrapper">
 
-      <aside class="poster-sidebar">
+      <aside class="poster-section">
         <img [src]="imageBaseUrl + movie.poster_path" [alt]="movie.title">
       </aside>
 
@@ -28,8 +29,8 @@
 
         <div class="title-section">
           <h2>{{ movie.title }}</h2>
-          @if (movie.original_title !== movie.title) {
-            <h2 class="original-title">{{ movie.original_title }}</h2>
+          @if (movie.original_title.toLowerCase() !== movie.title.toLowerCase()) {
+            <p class="original-title">Org. {{ movie.original_title }}</p>
           }
         </div>
 
@@ -41,37 +42,42 @@
           <span>Ocena: {{ movie.vote_average | number:'1.1-1' }}/10</span>
         </div>
 
-        <ul class="genres-list">
-          @for (genre of movie.genres; track genre.id) {
-            <li>{{ genre.name }}</li>
-          }
-        </ul>
-
         <div class="overview-section">
-          <h3>Fabuła</h3>
           <p>{{ movie.overview }}</p>
         </div>
 
-        <div class="credits-section">
-          @if (director()) {
-            <div class="crew-member">
-              <strong>Reżyseria: </strong> <span>{{ director()?.name }}</span>
-            </div>
-          }
-
-          <div class="cast-list">
-            <strong>Główne role: </strong>
-            @for (actor of mainCast(); track actor.id) {
-              <span>{{ actor.name }}@if (!$last) { , }</span>
+        <div class="details-section">
+          <app-heading-divider heading="GATUNKI"></app-heading-divider>
+          <ul class="genres-list wrapped-list">
+            @for (genre of movie.genres; track genre.id) {
+              <li class="chip">{{ genre.name }}</li>
             }
+          </ul>
+        </div>
+
+        <div class="details-section">
+          <div class="crew-member">
+            <app-heading-divider heading="REŻYSERIA"></app-heading-divider>
+            <span class="chip">{{ director()?.name }}</span>
           </div>
         </div>
 
-        <div class="production-section">
-          <strong>Produkcja: </strong>
-          @for (company of movie.production_companies; track company.id) {
-            <span>{{ company.name }}@if (!$last) { , }</span>
-          }
+        <div class="details-section">
+          <app-heading-divider heading="OBSADA"></app-heading-divider>
+          <ul class="cast-list wrapped-list">
+            @for (actor of mainCast(); track actor.id) {
+              <li class="chip">{{ actor.name }}</li>
+            }
+          </ul>
+        </div>
+
+        <div class="details-section">
+          <app-heading-divider heading="OBSADA"></app-heading-divider>
+          <ul class="production-list wrapped-list">
+            @for (company of movie.production_companies; track company.id) {
+              <li class="chip">{{ company.name }}</li>
+            }
+          </ul>
         </div>
 
       </section>

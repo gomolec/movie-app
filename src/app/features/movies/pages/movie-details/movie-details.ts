@@ -3,9 +3,10 @@ import { MovieService } from '../../services/movie-service';
 import { rxResource } from '@angular/core/rxjs-interop';
 import { TMDB_IMAGE_BACKDROP_BASE_URL, TMDB_IMAGE_POSTER_BASE_URL } from '../../../../core/constants/tmdb-constants';
 import { DatePipe, DecimalPipe } from '@angular/common';
+import { HeadingDivider } from '../../../../core/components/heading-divider/heading-divider';
 
 @Component({
-  imports: [DatePipe, DecimalPipe],
+  imports: [DatePipe, DecimalPipe, HeadingDivider],
   selector: 'app-movie-details',
   styleUrl: './movie-details.css',
   templateUrl: './movie-details.html',
