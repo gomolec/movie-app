@@ -1,0 +1,22 @@
+<app-heading-divider heading='WYNIKI WYSZUKIWANIA DLA "{{ q().toUpperCase() }}"' />
+
+@if (movieResource.isLoading()) {
+  <p>Ładowanie...</p>
+}
+
+@if (movieResource.error()) {
+  <div>
+    <p>Błąd: {{movieResource.error()}}</p>
+    <button (click)="movieResource.reload()">Odśwież</button>
+  </div>
+}
+
+@if (movieResource.hasValue()) {
+  <div class="grid">
+    @for (movie of movieResource.value().results; track movie.id) {
+      <app-movie-card [movie]="movie" />
+    } @empty {
+      <p>Brak wyników.</p>
+    }
+  </div>
+}

@@ -1,9 +1,13 @@
 <a [routerLink]="['/movie', movie().id]" class="movie-card">
   <div class="movie-poster">
-    <img
-      [src]="imageBaseUrl + movie().poster_path"
-      [alt]="'Plakat filmu ' + movie().title"
-    >
+    @if (posterUrl(); as url) {
+      <img
+        [src]="posterUrl()"
+        [alt]="'Plakat filmu ' + movie().title"
+      >
+    } @else {
+      <p class="movie-title"> {{ movie().title }}</p>
+    }
   </div>
   <!-- <div class="movie-info">
     <h3 class="movie-title">{{ movie().title }}</h3>

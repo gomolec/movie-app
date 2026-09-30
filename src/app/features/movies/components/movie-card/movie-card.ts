@@ -14,6 +14,14 @@ export class MovieCard {
 
   public imageBaseUrl = TMDB_IMAGE_POSTER_BASE_URL;
 
+  public posterUrl = computed(() => {
+    const posterPath = this.movie().poster_path;
+    if (!posterPath) {
+      return "";
+    }
+    return this.imageBaseUrl + posterPath;
+  });
+
   // public releaseYear = computed(() => {
   //   const date = this.movie().release_date;
 

@@ -19,4 +19,8 @@ export class MovieService {
     return this.http.get<MovieFull>(`${this.apiUrl}/movie/${id}?append_to_response=credits`);
   }
 
+  getSearchMovies(query: string) {
+    return this.http.get<TmdbResponse<Movie>>(`${this.apiUrl}/search/movie?query=${query}`);
+  }
+
 }

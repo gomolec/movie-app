@@ -1,8 +1,17 @@
+.movie-card {
+  display: block;
+  color: inherit;
+  text-decoration: none;
+}
+
 .movie-poster {
+  display: flex;
   position: relative;
   aspect-ratio: 2/3;
   width: 100%;
-  max-width: 300px;
+  /* max-width: 400px; */
+  align-items: center;
+  justify-content: center;
   background-color: var(--neutral-500);
   border-radius: 8px;
   border: 1px solid var(--neutral-600);
@@ -29,4 +38,13 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
+}
+
+.movie-title {
+  font-family: var(--font-heading);
+  color: var(--neutral-200);
+  font-weight: 600;
+  line-height: var(--leading-tight);
+  text-align: center;
+  font-size: var(--text-sm);
 }
