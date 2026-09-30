@@ -22,7 +22,11 @@
     <div class="content-wrapper">
 
       <aside class="poster-section">
-        <img [src]="imageBaseUrl + movie.poster_path" [alt]="movie.title">
+        @if (movie.poster_path; as posterPath) {
+          <img [src]="imageBaseUrl + posterPath" [alt]="'Plakat filmu ' + movie.title">
+        } @else {
+          <p>Brak plakatu</p>
+        }
       </aside>
 
       <section class="details-main">
@@ -35,49 +39,71 @@
         </div>
 
         <div class="meta-info">
-          <span>{{ movie.release_date | date:'yyyy' }}</span>
-          <span>•</span>
-          <span>{{ movie.runtime }} min</span>
+          @if (movie.release_date) {
+            <span>{{ movie.release_date | date:'yyyy' }}</span>
+          }
+          @if (movie.release_date && movie.runtime !== null) {
+            <span>•</span>
+          }
+          @if (movie.runtime !== null) {
+            <span>{{ movie.runtime }} min</span>
+          }
           <span>•</span>
           <span>Ocena: {{ movie.vote_average | number:'1.1-1' }}/10</span>
         </div>
 
         <div class="overview-section">
-          <p>{{ movie.overview }}</p>
+          <p>{{ movie.overview || 'Brak opisu filmu.' }}</p>
         </div>
 
         <div class="details-section">
           <app-heading-divider heading="GATUNKI"></app-heading-divider>
-          <ul class="genres-list wrapped-list">
-            @for (genre of movie.genres; track genre.id) {
-              <li class="chip">{{ genre.name }}</li>
-            }
-          </ul>
+          @if (movie.genres.length) {
+            <ul class="genres-list wrapped-list">
+              @for (genre of movie.genres; track genre.id) {
+                <li class="chip">{{ genre.name }}</li>
+              }
+            </ul>
+          } @else {
+            <p>Brak informacji o gatunkach.</p>
+          }
         </div>
 
         <div class="details-section">
           <div class="crew-member">
             <app-heading-divider heading="REŻYSERIA"></app-heading-divider>
-            <span class="chip">{{ director()?.name }}</span>
+            @if (director(); as director) {
+              <span class="chip">{{ director.name }}</span>
+            } @else {
+              <p>Brak informacji o reżyserze.</p>
+            }
           </div>
         </div>
 
         <div class="details-section">
           <app-heading-divider heading="OBSADA"></app-heading-divider>
-          <ul class="cast-list wrapped-list">
-            @for (actor of mainCast(); track actor.id) {
-              <li class="chip">{{ actor.name }}</li>
-            }
-          </ul>
+          @if (mainCast().length) {
+            <ul class="cast-list wrapped-list">
+              @for (actor of mainCast(); track actor.id) {
+                <li class="chip">{{ actor.name }}</li>
+              }
+            </ul>
+          } @else {
+            <p>Brak informacji o obsadzie.</p>
+          }
         </div>
 
         <div class="details-section">
-          <app-heading-divider heading="OBSADA"></app-heading-divider>
-          <ul class="production-list wrapped-list">
-            @for (company of movie.production_companies; track company.id) {
-              <li class="chip">{{ company.name }}</li>
-            }
-          </ul>
+          <app-heading-divider heading="PRODUKCJA"></app-heading-divider>
+          @if (movie.production_companies.length) {
+            <ul class="production-list wrapped-list">
+              @for (company of movie.production_companies; track company.id) {
+                <li class="chip">{{ company.name }}</li>
+              }
+            </ul>
+          } @else {
+            <p>Brak informacji o produkcji.</p>
+          }
         </div>
 
       </section>

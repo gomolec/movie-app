@@ -16,7 +16,11 @@ export class Search {
   public q = input<string>('');
 
   public movieResource = rxResource({
-    params: this.q,
+    params: () => {
+      const query = this.q().trim();
+
+      return query || undefined;
+    },
     stream: (loaderParams) => this.movieService.getSearchMovies(loaderParams.params),
   });
 
