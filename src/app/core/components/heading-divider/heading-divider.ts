@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, input } from '@angular/core';
 
 @Component({
   imports: [],
@@ -7,5 +7,5 @@ import { Component, Input } from '@angular/core';
   templateUrl: './heading-divider.html',
 })
 export class HeadingDivider {
-  @Input({ required: true }) heading!: string;
+  heading = input.required<string>();
 }
